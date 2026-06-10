@@ -16,7 +16,7 @@ contract OracleInvariantTest is Test {
     LendingPool public pool;
     Handler public handler;
 
-    uint256 public constant REAL_PRICE = 1e18; 
+    uint256 public constant REAL_PRICE = 1e18;
 
     function setUp() public {
         tokenA = new MockToken("Token A", "TKNA");

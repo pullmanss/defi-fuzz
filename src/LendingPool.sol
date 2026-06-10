@@ -15,7 +15,7 @@ contract LendingPool {
     mapping(address => uint256) public collateral;
     mapping(address => uint256) public borrowed;
 
-    uint256 public constant LTV = 80; 
+    uint256 public constant LTV = 80;
 
     constructor(address _collateral, address _borrow, address _oracle) {
         collateralToken = IERC20(_collateral);
@@ -37,10 +37,10 @@ contract LendingPool {
     function isSolvent(address user) public view returns (bool) {
         if (borrowed[user] == 0) return true;
         uint256 price = oracle.getPrice();
-        
+
         uint256 collateralValueInB = (collateral[user] * price) / 1e18;
         uint256 maxBorrow = (collateralValueInB * LTV) / 100;
-        
+
         return borrowed[user] <= maxBorrow;
     }
 }

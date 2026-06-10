@@ -23,7 +23,7 @@ contract MockDex {
 
     function swap(address tokenIn, uint256 amountIn) external {
         require(tokenIn == address(tokenA) || tokenIn == address(tokenB), "Invalid token");
-        
+
         if (tokenIn == address(tokenA)) {
             tokenA.transferFrom(msg.sender, address(this), amountIn);
             uint256 amountOut = (reserveB * amountIn) / (reserveA + amountIn);

@@ -14,12 +14,7 @@ contract Handler is Test {
 
     address public user = address(0x1337);
 
-    constructor(
-        LendingPool _pool,
-        MockDex _dex,
-        MockToken _tokenA,
-        MockToken _tokenB
-    ) {
+    constructor(LendingPool _pool, MockDex _dex, MockToken _tokenA, MockToken _tokenB) {
         pool = _pool;
         dex = _dex;
         tokenA = _tokenA;
