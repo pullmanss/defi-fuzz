@@ -1,18 +1,21 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-import "./MockDex.sol";
+contract SecurePriceOracle {
+    uint256 private price;
+    address public owner;
 
-contract PriceOracle {
-    MockDex public dex;
-
-    constructor(address _dex) {
-        dex = MockDex(_dex);
+    constructor(uint256 _initialPrice) {
+        price = _initialPrice;
+        owner = msg.sender;
     }
 
     function getPrice() external view returns (uint256) {
-        (uint256 reserveA, uint256 reserveB) = dex.getReserves();
-        require(reserveA > 0, "Empty reserves");
-        return (reserveB * 1e18) / reserveA;
+        return price;
+    }
+
+    function updatePrice(uint256 _newPrice) external {
+        require(msg.sender == owner, "Only owner");
+        price = _newPrice;
     }
 }

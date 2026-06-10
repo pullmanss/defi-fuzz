@@ -4,15 +4,15 @@ pragma solidity ^0.8.20;
 import "forge-std/Test.sol";
 import "../src/MockToken.sol";
 import "../src/MockDex.sol";
-import "../src/SecurePriceOracle.sol"; // Импортируем новый защищенный оракул
+import "../src/SecurePriceOracle.sol";
 import "../src/LendingPool.sol";
-import "./Handler.sol"; // Прямой импорт хендлера
+import "./Handler.sol";
 
 contract OracleInvariantTest is Test {
     MockToken public tokenA;
     MockToken public tokenB;
     MockDex public dex;
-    SecurePriceOracle public oracle; // Используем SecurePriceOracle
+    SecurePriceOracle public oracle;
     LendingPool public pool;
     Handler public handler;
 
@@ -30,7 +30,6 @@ contract OracleInvariantTest is Test {
         tokenB.approve(address(dex), type(uint256).max);
         dex.addLiquidity(100_000e18, 100_000e18);
 
-        // Развертываем защищенный оракул
         oracle = new SecurePriceOracle(REAL_PRICE);
         pool = new LendingPool(address(tokenA), address(tokenB), address(oracle));
 
